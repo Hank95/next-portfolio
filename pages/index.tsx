@@ -2,10 +2,11 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import NavBar from "./compnents/navBar";
 
 const Home: NextPage = () => {
   return (
-    <div className="">
+    <div className="bg-cyan-900">
       <Head>
         <title>Henry Pendleton</title>
         <meta name="description" content="Henry Pendleton's website" />
@@ -21,17 +22,26 @@ const Home: NextPage = () => {
         <meta property="og:locale:alternate" content="en_US" />
       </Head>
 
+      <NavBar />
+
       <main className="relative">
         <div className="w-full h-screen">
-          <Image
+          {/* <Image
             src="/images/greenleaf-gradient.png"
             alt="Green leaf"
             layout="fill"
             objectFit="cover"
-          />
-          <h1 className="absolute left- top-1/3 font-serif text-5xl">
-            Henry Pendleton
-          </h1>
+          /> */}
+          <div className="absolute left-1/4 bottom-2/3">
+            <h1 className="font-serif text-7xl text-amber-300">Henry</h1>
+            <h1 className="font-serif text-7xl text-amber-300">Pendleton</h1>
+            <h2 className="text-white">is currently ...</h2>
+            <h3 className="text-white">Building cool things.</h3>
+            <h4 className="text-white">
+              (Recent grad of the Flatiron Software Engineer Program / looking
+              for a job)
+            </h4>
+          </div>
         </div>
       </main>
 
