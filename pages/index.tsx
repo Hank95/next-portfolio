@@ -2,7 +2,8 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import NavBar from "./compnents/navBar";
+import NavBar from "../components/navBar";
+import Portfolio from "../components/portfolio";
 
 const Home: NextPage = () => {
   return (
@@ -44,6 +45,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       </main>
+      <Portfolio />
 
       <footer className={styles.footer}>
         <a
