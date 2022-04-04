@@ -12,7 +12,7 @@ interface Project {
 }
 
 export default function Portfolio() {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<any[]>([]);
   const [active, setActive] = useState<any>("");
   const projectsCollectionRef = collection(db, "projects");
 
