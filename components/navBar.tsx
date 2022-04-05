@@ -4,26 +4,26 @@ import Image from "next/image";
 
 const NavBar = () => {
   return (
-    <div className="grid grid-cols-2 items-center m-auto">
+    <div className="grid grid-cols-2 items-center m-2 z-50 bg-slate-800 rounded-full ">
       {/* my logo here */}
       <Link href="/">
-        <a className="m-7">
+        <a className="mx-7 my-3">
           <Image
             src="/images/hp_logo2_white.svg"
             alt="Henry Pendleton"
             width={125}
-            height={125}
+            height={100}
           />
         </a>
       </Link>
-      <div className=" flex flex-row text-white justify-end mx-20 items-center">
-        <div className="mx-10 p-2 rounded-lg hover:text-amber-300 hover:bg-slate-500 transition duration-500 ease-in-out">
+      <div className=" flex flex-row text-white justify-end mx-20items-center">
+        <div className="mx-10 p-4 rounded-full hover:text-amber-300 hover:bg-slate-500 transition duration-500 ease-in-out text-3xl ">
           <Link href="/">Home</Link>
         </div>
-        <div className="mx-10 p-2 rounded-lg hover:text-amber-300 hover:bg-slate-500 transition duration-500 ease-in-out">
+        <div className="mx-10 p-4 rounded-full hover:text-amber-300 hover:bg-slate-500 transition duration-500 ease-in-out text-3xl">
           <Link href="/resume">Resume</Link>
         </div>
-        <div className="mx-10 p-2 rounded-lg hover:text-amber-300 hover:bg-slate-500 transition duration-500 ease-in-out">
+        <div className="mx-10 p-4 rounded-full hover:text-amber-300 hover:bg-slate-500 transition duration-500 ease-in-out text-3xl">
           <Link href="/contact">Contact</Link>
         </div>
       </div>

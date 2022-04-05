@@ -1,13 +1,17 @@
 import type { NextPage } from "next";
+import { Canvas } from "@react-three/fiber";
+import { Suspense } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import NavBar from "../components/navBar";
 import Portfolio from "../components/portfolio";
+import Earth from "../components/earth";
+import Bio from "../components/bio";
 
 const Home: NextPage = () => {
   return (
-    <div className="bg-cyan-900">
+    <div className="bg-black">
       <Head>
         <title>Henry Pendleton</title>
         <meta name="description" content="Henry Pendleton's website" />
@@ -24,26 +28,13 @@ const Home: NextPage = () => {
       </Head>
 
       <NavBar />
-
-      <main className="relative">
-        <div className="w-full h-screen">
-          {/* <Image
-            src="/images/greenleaf-gradient.png"
-            alt="Green leaf"
-            layout="fill"
-            objectFit="cover"
-          /> */}
-          <div className="absolute left-1/4 bottom-2/3">
-            <h1 className="font-serif text-7xl text-amber-300">Henry</h1>
-            <h1 className="font-serif text-7xl text-amber-300">Pendleton</h1>
-            <h2 className="text-white">is currently ...</h2>
-            <h3 className="text-white">Building cool things.</h3>
-            <h4 className="text-white">
-              (Recent grad of the Flatiron Software Engineer Program / looking
-              for a job)
-            </h4>
-          </div>
-        </div>
+      <main className="w-screen h-screen relative">
+        {/* <Suspense fallback={<div>Loading...</div>}> */}
+        <Canvas id="canvas">
+          <Earth />
+        </Canvas>
+        <Bio />
+        {/* </Suspense> */}
       </main>
       <Portfolio />
 
