@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import NavBar from "../components/navBar";
 import { db } from "../firebase/clientApp";
+import { doc, setDoc } from "firebase/firestore"; 
 import Footer from "../components/footer";
 
 // contact page where you can contact me
@@ -13,6 +14,27 @@ const Contact: NextPage = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!name || !email || !message) {
+      setError("Please fill in all fields");
+      return;
+    }
+    setError("");
+    setSuccess("");
+    await setDoc(doc(db, "contact",email), {
+      name,
+      email,
+      message,
+      date: new Date().toISOString()
+    });
+    setName("");
+    setEmail("");
+    setMessage("");
+    setSuccess("Message sent successfully");
+  };
+
 
   return (
     <>
@@ -33,19 +55,78 @@ const Contact: NextPage = () => {
       <NavBar />
       <main>
         <div className="grid grid-cols-1 align-middle justify-center">
-          {/* Todays date big and bold */}
           <div className="shadow-lg bg-slate-900 rounded-lg p-5 my-1 mx-auto w-5/6 text-white">
             <div className="text-center text-2xl font-bold text-white"></div>
             <div className="text-center text-xl font-bold text-white">
-              <h1>Contact</h1>
+              <h1>Contact Me</h1>
             </div>
             <div className="text-center text-xl font-bold text-white">
               <h1>Henry Pendleton</h1>
             </div>
+            {/* Form where a user can imput a email  */}
+            <form
+              className="grid grid-cols-1 gap-4"
+              onSubmit={handleSubmit}
+            >
+              <div className="grid grid-cols-1 gap-4">
+
+                <div className="grid grid-cols-1 gap-4">
+                  <label className="text-white" htmlFor="name">
+                    Name
+                  </label>
+                  <input
+                    className="bg-gray-800 border-2 border-gray-700 rounded-lg py-2 px-4 text-white focus:outline-none focus:shadow-outline"
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
+                <div className="grid grid-cols-1 gap-4">
+                  <label className="text-white" htmlFor="email">
+                    Email
+                  </label>
+                  <input
+                    className="bg-gray-800 border-2 border-gray-700 rounded-lg py-2 px-4 text-white focus:outline-none focus:shadow-outline"
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="grid grid-cols-1 gap-4">
+                  <label className="text-white" htmlFor="message">
+                    Message
+                  </label>
+                  <textarea
+                    className="bg-gray-800 border-2 border-gray-700 rounded-lg py-2 px-4 text-white focus:outline-none focus:shadow-outline"
+                    name="message"
+                    id="message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  ></textarea>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 gap-4">
+                <button
+                  className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+            {error && <p className="text-red-500 text-center">{error}</p>}
+            {success && <p className="text-green-500 text-center">{success}</p>}
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer />  
     </>
   );
 };
+
+
+export default Contact;
